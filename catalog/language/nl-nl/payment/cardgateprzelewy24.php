@@ -16,6 +16,9 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
+// Heading
+$_['heading_title']             = 'Przelewy24';
+
 // Text
 $_['text_title']                = 'Przelewy24';
 $_['text_redirect_message']     = 'U zult worden doorgestuurd naar CardGate, onze Payment Service Provider';

@@ -308,7 +308,7 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
 				$waiting = false;
 				if ($data ['code'] == '0' || ($data ['code'] >= '700' && $data ['code'] <= '710')) {
 					$waiting = true;
-					$status = $this->config->get ( 'payment_cardgate_payment_initialized_status' );
+					$status = $this->getOrderStatus('Pending');
 					$this->language->get ( 'text_payment_initialized' );
 					switch ($data ['code']) {
 						case '700' :
@@ -332,7 +332,7 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
 					if ($data ['code'] == '309') {
 						$status = $order ['order_status_id'];
 					} else {
-						$status = $this->config->get ( 'payment_cardgate_payment_failed_status' );
+						$status = $this->getOrderStatus('Failed');
 						$comment .= $this->language->get ( 'text_payment_failed' );
 					}
 				}
@@ -468,6 +468,14 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
             $data = json_encode($oData);
             $this->db->query("UPDATE `". DB_PREFIX . "session` SET `data` = '".$data."' WHERE `session_id` = '" . $session_id ."'");
             $this->db->query("DELETE FROM `". DB_PREFIX . "cart` WHERE `session_id` = '" . $session_id ."'");
+        }
+    }
+    private function getOrderStatus($status){
+        $orderResult = $this->db->query("SELECT `order_status_id` FROM `". DB_PREFIX . "order_status`  WHERE `name` = '" . $status ."' LIMIT 1");
+        if ($orderResult->num_rows) {
+            return $orderResult->row['order_status_id'];
+        } else {
+            return 0;
         }
     }
 }

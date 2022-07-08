@@ -16,8 +16,10 @@
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
+// Heading
+$_['heading_title']             = 'Paysafecash';
 // Text
-$_['text_title']                = 'PaySafeCash';
+$_['text_title']                = 'Paysafecash';
 $_['text_redirect_message']     = 'U zult worden doorgestuurd naar CardGate, onze Payment Service Provider';
 $_['text_payment_initialized']  = 'Transactie gestart, wacht op bevestiging.';
 $_['text_payment_complete']     = 'Betaling succesvol.';

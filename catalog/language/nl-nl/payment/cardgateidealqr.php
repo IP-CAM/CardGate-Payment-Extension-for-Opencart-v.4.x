@@ -12,7 +12,7 @@
  * @category    Payment
  * @package     Payment_CardGate
  * @author      Richard Schoots, <info@cardgate.com>
- * @copyright   Copyright (c) 2022 CardGate (http://www.cardgateplusl.com)
+ * @copyright   Copyright (c) 2022 CardGate (http://www.cardgatel.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 

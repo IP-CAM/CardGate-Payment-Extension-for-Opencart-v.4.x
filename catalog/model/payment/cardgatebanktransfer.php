@@ -13,7 +13,7 @@ namespace Opencart\Catalog\Model\Extension\Cardgate\Payment;
  * @category    Payment
  * @package     Payment_CardGate
  * @author      Richard Schoots, <info@cardgate.com>
- * @copyright   Copyright (c) 2022 CardGate (http://www.cardgateplus.com)
+ * @copyright   Copyright (c) 2022 CardGate (http://www.cardgate.com)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class CardGateBanktransfer extends \Opencart\System\Engine\Model {
