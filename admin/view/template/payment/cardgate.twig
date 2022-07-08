@@ -1,0 +1,103 @@
+{{ header }} {{column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="float-end">
+                <button type="submit" form="form-payment" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fas fa-save"></i></button>
+                <a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fas fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ol class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header"><i class="fas fa-pencil-alt"></i> {{ text_edit }}</div>
+            <div class="card-body">
+                <form id="form-payment" action="{{ save }}" method="post" data-oc-toggle="ajax">
+                    <div class="row mb-3">
+                        <label for="input-test-mode" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_test_mode_help }}"> {{ entry_test_mode }}</span></label>
+                        <div class="col-sm-10">
+                            <select name="payment_cardgate_test_mode" id="input-test-mode" class="form-select">
+                                {% if payment_cardgate_test_mode == "test" %}
+                                    <option value="live">{{ text_live_mode }}</option>
+                                    <option value="test" selected="selected">{{ text_test_mode }}</option>
+                                {% else %}
+                                    <option value="live" selected="selected">{{ text_live_mode }}</option>
+                                    <option value="test">{{ text_test_mode }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3 required">
+                        <label for="input-site-id" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_site_id }}">{{ entry_site_id }}</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_cardgate_site_id" value="{{ payment_cardgate_site_id }}" id="input-site-id" class="form-control"/>
+                            <div id="error-site-id" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 required">
+                        <label for="input-hash-key" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_hash_key }}">{{ entry_hash_key }}</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_cardgate_hash_key" value="{{ payment_cardgate_hash_key }}" id="input-hash-key" class="form-control"/>
+                            <div id="error-hash-key" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 required">
+                        <label for="input-merchant-id" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_merchant_id }}">{{ entry_merchant_id }}</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_cardgate_merchant_id" value="{{ payment_cardgate_merchant_id }}" id="input-merchant-id" class="form-control"/>
+                            <div id="error-merchant-id" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-3 required">
+                        <label for="input-api-key" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_api_key }}">{{ entry_api_key }}</span></label>
+                        <div class="col-sm-10">
+                            <input type="password" name="payment_cardgate_api_key" value="{{ payment_cardgate_api_key }}" id="input-api-key" class="form-control"/>
+                            <div id="error-api-key" class="invalid-feedback"></div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="input-order-description" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_order_description }}">{{ entry_order_description }}</span></label>
+                        <div class="col-sm-10">
+                            <input type="text" name="payment_cardgate_order_description" value="{{ payment_cardgate_order_description }}" id="input-order-description" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="input-use-logo" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_use_logo }}">{{ entry_use_logo }}</span></label>
+                        <div class="col-sm-10">
+                            <select name="payment_cardgate_use_logo" id="input-use-logo" class="form-select">
+                                {% if payment_cardgate_use_logo == 1 %}
+                                    <option value="1" selected="selected">yes</option>
+                                    <option value="0">no</option>
+                                {% else %}
+                                    <option value="1" >yes</option>
+                                    <option value="0" selected="selected">no</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="input-use-title" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_use_title }}">{{ entry_use_title }}</span></label>
+                        <div class="col-sm-10">
+                            <select name="payment_cardgate_use_title" id="input-use-title" class="form-select">
+                                {% if payment_cardgate_use_title == 1 %}
+                                    <option value="1" selected="selected">{{ text_yes }}</option>
+                                    <option value="0">{{ text_no }}</option>
+                                {% else %}
+                                    <option value="1" >{{ text_yes }}</option>
+                                    <option value="0" selected="selected">{{ text_no }}</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+                    <div><input type="hidden" name="payment_cardgate_status" value="0" class="form-control"/></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{ footer }}
