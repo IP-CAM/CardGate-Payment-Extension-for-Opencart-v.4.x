@@ -72,11 +72,12 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
         } else {
             $data[ $this->key( 'custom_payment_method_text' ) ] = $this->config->get( $this->key( 'custom_payment_method_text' ) );
             $data[ $this->key( 'total' ) ]                      = $this->config->get( $this->key( 'total' ) );
-            $data[ $this->key( 'order_status_id' ) ]            = $this->config->get( $this->key( 'order_status_id' ) );
+            $data[ $this->key( 'order_status_id' ) ]            = (empty($this->config->get( $this->key( 'order_status_id' )) ) ? 2 : $this->config->get( $this->key( 'order_status_id' ))) ;
             $data[ $this->key( 'geo_zone_id' ) ]                = $this->config->get( $this->key( 'geo_zone_id' ) );
             $data[ $this->key( 'status' ) ]                     = $this->config->get( $this->key( 'status' ) );
             $data[ $this->key( 'sort_order' ) ]                 = $this->config->get( $this->key( 'sort_order' ) );
         }
+
         return $data;
     }
 
