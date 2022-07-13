@@ -20,11 +20,7 @@
 $_['heading_title']          = 'Cardgate Algemeen';
 $_['text_extension']         = 'Extensions';
 
-// Text 
-$_['text_general']           = 'Algemeen';
-$_['text_order_status']      = 'Order Status';
-$_['text_info']              = 'Info';
-$_['text_payment']           = 'Betaling';
+// Text
 $_['text_success']           = 'Gelukt: U heeft uw Cardgate Algemeen instellingen gewijzigd!';
 $_['text_cardgateplus']      = '<a onclick="window.open(\'http://www.cardgate.com/\');"><img src="/extension/cardgate/admin/view/image/payment/cardgate.png" alt="Cardate Algemeen" title="Cardgate Algemeen" style="border: 1px solid #EEEEEE;" /></a>';
 $_['text_cardgate']          = $_['text_cardgateplus'];
@@ -52,7 +48,6 @@ $_['text_api_key']           = 'Vul hier uw API key in . Die heeft u gekregen va
 $_['text_gateway_language']  = 'Stel een standaard taal in voor de gateway.';
 $_['text_order_description'] = 'Omschrijving voor de betaling welke getoond zal worden in het betaalscherm. Variabelen: <b>%id%</b> = Order ID';
 $_['text_use_logo']          = 'Toon het logo van de betaalmehtode in de checkout';
-$_['text_use_title']         = 'Toon de betaalmethode naam in de checkout';
 $_['text_total']             = 'Het order totaal moet boven dit bedrag zijn om de betaal methode te tonen.';
 $_['text_control_url']       = 'Control Url:';
 $_['text_plugin_version']    = 'Plugin versie';

@@ -24,7 +24,7 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
 	 * Index action
 	 */
 	public function _index($payment) {
-		$this->load->language ( 'extension/payment/' . $payment );
+		$this->load->language ( 'extension/cardgate/payment/' . $payment );
 		
 		$data ['button_confirm'] = $this->language->get ( 'button_confirm' );
 		$data ['redirect_message'] = $this->language->get ( 'text_redirect_message' );
@@ -159,20 +159,7 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
 				$oItem->setVatIncluded ( 0 );
 				$cart_item_total += $price;
 			}
-			
-			// extra fees
-			if (isset ( $this->session->data ['cardgatefees'] )) {
-				$aFees = $this->session->data ['cardgatefees'];
-				if (count ( $aFees ) > 0) {
-					foreach ( $aFees as $fee ) {
-						$oItem = $oCart->addItem ( \cardgate\api\Item::TYPE_HANDLING, $fee ['code'], $fee ['name'], 1, $fee ['amount'] );
-						$oItem->setVatAmount ( $fee ['vat_amount'] );
-						$oItem->setVatIncluded ( 0 );
-						$cart_item_total += $fee ['amount'] + $fee ['vat_amount'];
-					}
-				}
-			}
-			
+
 			$item_difference = $amount - $cart_item_total;
 			
 			$aTaxTotals = $this->cart->getTaxes ();
