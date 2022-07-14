@@ -67,20 +67,6 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="input-use-logo" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_use_logo }}">{{ entry_use_logo }}</span></label>
-                        <div class="col-sm-10">
-                            <select name="payment_cardgate_use_logo" id="input-use-logo" class="form-select">
-                                {% if payment_cardgate_use_logo == 1 %}
-                                    <option value="1" selected="selected">yes</option>
-                                    <option value="0">no</option>
-                                {% else %}
-                                    <option value="1" >yes</option>
-                                    <option value="0" selected="selected">no</option>
-                                {% endif %}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
                         <label for="input-plugin-version" class="col-sm-2 col-form-label"><span data-bs-toggle="tooltip" title="{{ text_plugin_version }}">{{ entry_plugin_version }}</span></label>
                         <div class="col-sm-10">
                             <p>{{ payment_cardgate_plugin_version }}</p>

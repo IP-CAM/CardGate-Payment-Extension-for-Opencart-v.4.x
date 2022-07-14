@@ -26,18 +26,15 @@ $_['text_live_mode']         = 'Live mode';
 $_['text_site_id']           = 'Fill in your site ID. You can find your site ID at your CardGate merchant backoffice.';
 $_['text_hash_key']          = 'Fill in your hash key. If you use the hash key, make sure it is the same as in your CardGate merchant backoffice.';
 
-$_['text_payment']           = 'Payment';
+$_['text_payment']           = 'Extensions';
 $_['text_success']           = 'Success: You have modified CardGate Generic account details!';
 $_['text_cardgate']          = '<a onclick="window.open(\'http://www.cardgate.com/\');"><img src="/extension/cardgate/admin/view/image/payment/cardgate.png" alt="CardGate Generic" title="Cardgate Generic" style="border: 1px solid #EEEEEE;" /></a>';
 
-
-$_['text_set_order_status']  = 'Set Order Status';
 $_['text_author']            = '<a href="http://www.cardgate.com/" target="_blank">www.cardgate.com</a>';
 $_['text_test_mode_help']    = 'Switching between Test and Live mode. If you don\'t have an account, sign up at http://www.cardgate.com/" .';
 $_['text_merchant_id']       = 'Fill in your merchant ID number. You can find your merchant ID at your CardGate merchant backoffice.';
 $_['text_api_key']           = 'Fill in you API key. This has been given to you by your account manager';
 $_['text_order_description'] = 'Payment description that will be shown to the customer in the gateway screen. Variables: <b>%id%</b> = Order ID';
-$_['text_use_logo']          = 'Show the payment method logo in the checkout';
 
 // Entry
 $_['entry_test_mode']         = 'Test/Live Mode:';
@@ -46,7 +43,6 @@ $_['entry_hash_key']          = 'Hash key:';
 $_['entry_merchant_id']       = 'Merchant ID:';
 $_['entry_api_key']           = 'API key:';
 $_['entry_order_description'] = 'Order Description';
-$_['entry_use_logo']          = 'Use Logo';
 $_['entry_plugin_version']    = 'Current version';
 
 // Error

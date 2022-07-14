@@ -21,7 +21,7 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
         $this->load->language( 'extension/cardgate/payment/' . $payment );
         $this->document->setTitle( $this->language->get( 'heading_title' ) );
         $this->load->model( 'setting/setting' );
-        $this->model_setting_setting->editValue('payment_cardgate','payment_cardgate_plugin_version', $this->version);
+        $this->updateVersion();
         $this->payment = $payment;
 
         $tokenParameter = 'user_token=' . $this->session->data['user_token'];
@@ -69,7 +69,6 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
             $data[ $this->key( 'merchant_id' ) ]                = $this->config->get( $this->key( 'merchant_id' ) );
             $data[ $this->key( 'api_key' ) ]                    = $this->config->get( $this->key( 'api_key' ) );
             $data[ $this->key( 'order_description' ) ]          = $this->config->get( $this->key( 'order_description' ) );
-            $data[ $this->key( 'use_logo' ) ]                   = $this->config->get( $this->key( 'use_logo' ) );
             $data[ $this->key( 'plugin_version' ) ]             = $this->config->get( $this->key( 'plugin_version' ) );
         } else {
             $data[ $this->key( 'custom_payment_method_text' ) ] = $this->config->get( $this->key( 'custom_payment_method_text' ) );
@@ -87,6 +86,9 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
 
         // reset bank issuers
         $this->cache->set('cardgateissuerrefresh', time());
+
+        //update version
+        $this->updateVersion();
 
         $this->load->language('extension/cardgate/payment/'.$payment);
         $json = [];
@@ -119,6 +121,19 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
     }
     private function key($variable) {
         return 'payment_'.$this->payment.'_'.$variable;
+    }
+    private function updateVersion(){
+        $store_id = 0;
+        $code = 'payment_cardgate';
+        $key = 'payment_cardgate_plugin_version';
+        $value = $this->version;
+        $version = $this->model_setting_setting->getValue($key, $store_id);
+        if  (empty($version)){
+            $this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = '" . (int)$store_id . "', `code` = '" . $this->db->escape($code) . "', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape($value) . "'");
+        } else {
+            $this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `value` = '" . $this->db->escape($value) . "', `serialized` = '0'  WHERE `code` = '" . $this->db->escape($code) . "' AND `key` = '" . $this->db->escape($key) . "' AND `store_id` = '" . (int)$store_id . "'");
+        }
+
     }
 }
 ?>

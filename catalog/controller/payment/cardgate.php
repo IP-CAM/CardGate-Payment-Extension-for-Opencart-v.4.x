@@ -18,7 +18,6 @@ namespace Opencart\Catalog\Controller\Extension\Cardgate\Payment;
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class CardgateGeneric extends \Opencart\System\Engine\Controller {
-	var $version = '4.0.0';
 	
 	/**
 	 * Index action
@@ -59,7 +58,7 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
 			$oCardGate->version ()->setPlatformName ( 'Opencart' );
 			$oCardGate->version ()->setPlatformVersion ( VERSION );
 			$oCardGate->version ()->setPluginName ( 'Opencart_CardGate' );
-			$oCardGate->version ()->setPluginVersion ( $this->version );
+			$oCardGate->version ()->setPluginVersion ( $this->config->get('payment_cardgate_plugin_version'));
 			
 			$iSiteId = ( int ) $this->config->get ( 'payment_cardgate_site_id' );
 			
