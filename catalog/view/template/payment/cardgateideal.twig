@@ -1,0 +1,76 @@
+<fieldset>
+    <legend>{{ text_title }}</legend>
+    <p><b>{{ text_description }}</b></p>
+    <form id="form-cardgateideal">
+
+        <div class="row">
+            <div class="col">
+                <div class="mb-3 required">
+                    <input type="hidden" name="option" value="ideal" />
+                    <fieldset class="payment">
+                        <legend>{{ text_ideal_bank_selection }}</legend>
+                        <label style="position: relative;" class="method" >
+                            <img style="height:80px; max-width:100px" src="./image/payment/cgp/ideal.svg" alt="iDEAL" />
+                        </label>
+                        <label style="position: relative; width: 200px;" class="issuers" for="CGP_IDEAL_ISSUER">
+                            <select id="CGP_IDEAL_ISSUER" name="suboption">
+                                {{ text_ideal_bank_options }}
+                            </select>
+                        </label>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-inline-block pt-2 pd-2 w-100 text-end">
+            <button type="submit" id="button-confirm" class="btn btn-primary">{{ button_confirm }}</button>
+        </div>
+
+    </form>
+</fieldset>
+<script type="text/javascript"><!--
+    $('#form-cardgateideal').on('submit', function (e) {
+        e.preventDefault();
+
+        var element = this;
+
+        $.ajax({
+            url: 'index.php?route=extension/cardgate/payment/cardgateideal|confirm&language={{ language }}',
+            type: 'post',
+            data: $('#form-cardgateideal').serialize(),
+            dataType: 'json',
+            contentType: 'application/x-www-form-urlencoded',
+            cache: false,
+            processData: false,
+            beforeSend: function () {
+                $('#button-confirm').prop('disabled', true).addClass('loading');
+            },
+            complete: function () {
+                $('#button-confirm').prop('disabled', false).removeClass('loading');
+            },
+            success: function (json) {
+                $('.alert-dismissible').remove();
+                $('#form-cardgateideal').find('.is-invalid').removeClass('is-invalid');
+                $('#form-cardgateideal').find('.invalid-feedback').removeClass('d-block');
+
+                if (json['error']) {
+                    if (json['error']['warning']) {
+                        $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fas fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+                    }
+
+                    for (key in json['error']) {
+                        $('#input-' + key.replaceAll('_', '-')).addClass('is-invalid').find('.form-control, .form-select, .form-check-input, .form-check-label').addClass('is-invalid');
+                        $('#error-' + key.replaceAll('_', '-')).html(json['error'][key]).addClass('d-block');
+                    }
+                }
+
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    //--></script>
