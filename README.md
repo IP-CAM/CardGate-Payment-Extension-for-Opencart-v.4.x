@@ -17,17 +17,17 @@ Please visit [My CardGate](https://my.cardgate.com/) and retrieve your credentia
 
 1. Download the most recent [cardgate.ocmod.zip](https://github.com/cardgate/opencart4/releases/) file on your desktop.
 
-2. Go to the **admin** section of your webshop, and select **extensions, installer** and upload the CardGate extension.
+2. Go to the **admin** section of your webshop, and select **Extensions, Installer** and upload the CardGate extension.
 
 3. Use the button to install the extension.
  
 ## Configuration
 
-1. Go to the **admin** section of your webshop and select **Extensions, extensions** and choose .
+1. Go to the **admin** section of your webshop and select **Extensions, extensions**.
 
 2. Choose as extension type: **Payments**.
 
-3. Scroll to the **CardGate payment method** and select **Install**.
+3. Scroll to the **CardGate** payment method and click on **Install**.
 
 4. Now click on the **Edit** button of the payment method.
 
@@ -45,9 +45,9 @@ Please visit [My CardGate](https://my.cardgate.com/) and retrieve your credentia
 
 11. Go to [My CardGate](https://my.cardgate.com/), choose **Sites** and select the appropriate site.
 
-12. Go to **Connection to the website** and enter the **hash key**, if you did so in the **CardGate Generic payment method**.
+12. Go to **Connection to the website** and enter the **hash key**, if you did so in the **CardGate** payment method.
 
-13. When you are **finished testing** make sure that you switch **CardGate extension** from **Test mode** to **Live mode** and save it (**Save**).
+13. When you are **finished testing** make sure that you switch the **CardGate** extension from **Test mode** to **Live mode** and save it (**Save**).
 
 ## Requirements
 
