@@ -20,15 +20,12 @@
 $_['heading_title']             = 'iDEAL';
 
 // Text
-$_['text_title']                = 'iDEAL';
-$_['text_redirect_message']     = 'U zult worden doorgestuurd naar CardGate, onze Payment Service Provider';
-$_['text_payment_initialized']  = 'Transactie gestart, wacht op bevestiging.';
-$_['text_payment_complete']     = 'Betaling succesvol.';
-$_['text_payment_failed']       = 'Betaling mislukt of geannuleerd.';
-$_['text_select_payment_method']= 'Selecteer de gewenste betaalmethode:';
-$_['text_transaction_nr']       = 'Transactie nr:';
-
-$_['text_ideal_bank_selection']    = 'Selecteer uw bank:';
-$_['text_ideal_bank_please']       = '--Maak uw keuze--';
-$_['text_ideal_bank_additional']   = '------ Overige Banken ------';
-$_['text_ideal_bank_alert']        = 'Selecteer uw bank';
+$_['text_title']                 = 'iDEAL';
+$_['text_redirect_message']      = 'U zult worden doorgestuurd naar CardGate, onze Payment Service Provider';
+$_['text_payment_initialized']   = 'Transactie gestart, wacht op bevestiging.';
+$_['text_payment_complete']      = 'Betaling succesvol.';
+$_['text_payment_failed']        = 'Betaling mislukt of geannuleerd.';
+$_['text_select_payment_method'] = 'Selecteer de gewenste betaalmethode:';
+$_['text_ideal_bank_selection']  = 'Kies uw bank a.u.b';
+$_['text_transaction_nr']        = 'Transactie nr:';
+$_['text_billing_address_error'] = 'CardGate fout: Factuuradres niet aanwezig in de checkout.';
