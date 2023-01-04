@@ -24,3 +24,4 @@ $_['text_payment_complete']     = 'Betaling succesvol.';
 $_['text_payment_failed']       = 'Betaling mislukt of geannuleerd.';
 $_['text_select_payment_method']= 'Selecteer de gewenste betaalmethode:';
 $_['text_transaction_nr']       = 'Transactie nr:';
+$_['text_billing_address_error']    = 'CardGate error: Billing address needs to be set in the checkout';
