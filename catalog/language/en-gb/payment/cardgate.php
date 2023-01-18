@@ -22,6 +22,7 @@ $_['text_redirect_message']         = 'You will be shortly redirected to CardGat
 $_['text_payment_initialized']      = 'Transaction started, waiting for payment.';
 $_['text_payment_complete']         = 'Payment complete.';
 $_['text_payment_failed']           = 'Payment failed or canceled by user.';
+$_['text_payment_pending']          = 'Payment pending: waiting for bank approval.';
 $_['text_select_payment_method']    = 'Select payment method:';
 $_['text_transaction_nr']           = 'Transaction nr:';
 $_['text_billing_address_error']    = 'CardGate error: Billing address needs to be set in the checkout';

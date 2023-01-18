@@ -22,6 +22,7 @@ $_['text_redirect_message']     = 'U zult worden doorgestuurd naar CardGate, onz
 $_['text_payment_initialized']  = 'Transactie gestart, wacht op bevestiging.';
 $_['text_payment_complete']     = 'Betaling succesvol.';
 $_['text_payment_failed']       = 'Betaling mislukt of geannuleerd.';
+$_['text_payment_pending']      = 'Betaling wachtend: Wachten op goedkeuring van de bank.';
 $_['text_select_payment_method']= 'Selecteer de gewenste betaalmethode:';
 $_['text_transaction_nr']       = 'Transactie nr:';
 $_['text_billing_address_error']    = 'CardGate error: Billing address needs to be set in the checkout';

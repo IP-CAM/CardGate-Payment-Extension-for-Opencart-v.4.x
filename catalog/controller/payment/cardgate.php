@@ -19,7 +19,7 @@
      */
     class CardgateGeneric extends \Opencart\System\Engine\Controller {
         // Also adjust the version in Opencart\Admin\Controller\Extension\Cardgate\Payment\CardgateGeneric
-        protected $version = '4.0.1';
+        protected $version = '4.0.2';
 
         /**
          * Index action
@@ -102,7 +102,6 @@
                         $oConsumer->shippingAddress()->setCountry( $address ['iso_code_2'] );
                     }
 
-                    $calculate       = $this->config->get( 'config_tax' );
                     $products        = $this->cart->getProducts();
                     $cart_item_total = 0;
                     $vat_total       = 0;
@@ -230,8 +229,15 @@
          * After a failed transaction a customer will be send here
          */
         public function cancel() {
-
-            $this->response->redirect ( $this->url->link('checkout/failure', 'language=' . $this->config->get('config_language'), true) );
+            $this->load->model( 'checkout/order' );
+            $data = $_REQUEST;
+            if ($data['code'] == 309){
+                //canceled
+                $this->response->redirect ( $this->url->link('checkout/checkout', 'language=' . $this->config->get('config_language'), true) );
+            } else {
+                //failed
+                $this->response->redirect( $this->url->link( 'checkout/failure', 'language=' . $this->config->get( 'config_language' ), true ) );
+            }
         }
 
         /**
@@ -282,24 +288,11 @@
                     $this->load->model ( 'checkout/order' );
                     $order = $this->model_checkout_order->getOrder ( $data ['order_id'] );
                     $complete_status = $this->config->get ( 'payment_cardgate'.$payment.'_order_status_id' );
+                    $failed_status = $this->getOrderStatus('Failed');
                     $comment = '';
 
-                    $waiting = false;
-                    if ($data ['code'] == '0' || ($data ['code'] >= '700' && $data ['code'] <= '710')) {
-                        $waiting = true;
+                    if ($data['code'] == 0){
                         $status = $this->getOrderStatus('Pending');
-                        $this->language->get ( 'text_payment_initialized' );
-                        switch ($data ['code']) {
-                            case '700' :
-                                $comment .= 'Transaction is waiting for user action. ';
-                                break;
-                            case '701' :
-                                $comment .= 'Waiting for confirmation. ';
-                                break;
-                            case '710' :
-                                $comment .= 'Waiting for confirmation recurring. ';
-                                break;
-                        }
                     }
 
                     if ($data ['code'] >= '200' && $data ['code'] < '300') {
@@ -311,9 +304,14 @@
                         if ($data ['code'] == '309') {
                             $status = $order ['order_status_id'];
                         } else {
-                            $status = $this->getOrderStatus('Failed');
+                            $status = $failed_status;
                             $comment .= $this->language->get ( 'text_payment_failed' );
                         }
+                    }
+
+                    if ($data ['code'] >= '700' && $data ['code'] < '800') {
+                        $status = $this->getOrderStatus('Pending');
+                        $comment .= $this->language->get ( 'text_payment_pending' );
                     }
 
                     $comment .= '  ' . $this->language->get ( 'text_transaction_nr' );
@@ -322,15 +320,16 @@
                     $this->load->model('checkout/order');
                     $this->load->model('checkout/cart');
 
-                    if (($order ['order_status_id'] != $status && $order ['order_status_id'] != $complete_status) || ($waiting = true && $order ['order_status_id'] != $complete_status)) {
+                    if ($order ['order_status_id'] != $complete_status) {
                         $this->model_checkout_order->addHistory ( $order ['order_id'], $status, $comment, true );
-                        if ($data ['code'] != '309') {
+                        if ($order ['order_status_id'] == $complete_status) {
                             $this->removeCart( $data['session_id'] );
                         }
-                    }
+                        echo $data ['transaction'] . '.' . $data ['code'];
+                    } else {
+                        echo 'Order already completed.';
 
-                    // Display transaction_id and status
-                    echo $data ['transaction'] . '.' . $data ['code'];
+                    }
                 }
             } catch ( \cardgate\api\Exception $oException_ ) {
                 echo htmlspecialchars ( $oException_->getMessage () );
