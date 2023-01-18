@@ -17,7 +17,7 @@ oder wenden Sie sich an Ihren Account Manager.
 
 ## Installation
 
-1. Laden Sie die neueste Datei [cardgate.ocmod..zip](https://github.com/cardgate/opencart4/releases/) auf Ihren Desktop herunter.  
+1. Laden Sie die neueste Datei [cardgate.ocmod.zip](https://github.com/cardgate/opencart4/releases/) auf Ihren Desktop herunter.  
    
 2. Gehen Sie zum **Admin-Bereich** Ihres Webshops und wählen Sie **Extensions, Installer**.  
 
