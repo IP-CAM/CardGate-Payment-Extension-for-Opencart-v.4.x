@@ -16,7 +16,7 @@ of neem contact op met je accountmanager.
 
 ## Installatie
 
-1. Download en unzip het meest recente [cardgate.ocmod.zip](https://github.com/cardgate/opencart3/releases/) bestand op je bureaublad.
+1. Download en unzip het meest recente [cardgate.ocmod.zip](https://github.com/cardgate/opencart4/releases/) bestand op je bureaublad.
 
 2. Ga naar het **admin** gedeelte van je webshop, en kies **Extensies, Installer** en upload de CardGate extensie.
 ## Configuratie
