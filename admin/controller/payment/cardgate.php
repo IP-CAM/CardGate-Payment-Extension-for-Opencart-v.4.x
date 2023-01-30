@@ -16,7 +16,7 @@ class Cardgate extends CardgateGeneric {
 class CardgateGeneric extends \Opencart\System\Engine\Controller {
     // Also adjust the version in Opencart\Catalog\Controller\Extension\Cardgate\Payment\CardgateGeneric
     protected $payment;
-    protected $version = '4.0.2';
+    protected $version = '4.0.3';
 
     public function _index($payment): void {
         $this->load->language( 'extension/cardgate/payment/' . $payment );
