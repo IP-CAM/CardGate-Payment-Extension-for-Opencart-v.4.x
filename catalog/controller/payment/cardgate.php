@@ -19,7 +19,7 @@
      */
     class CardgateGeneric extends \Opencart\System\Engine\Controller {
         // Also adjust the version in Opencart\Admin\Controller\Extension\Cardgate\Payment\CardgateGeneric
-        protected $version = '4.0.2';
+        protected $version = '4.0.3';
 
         /**
          * Index action

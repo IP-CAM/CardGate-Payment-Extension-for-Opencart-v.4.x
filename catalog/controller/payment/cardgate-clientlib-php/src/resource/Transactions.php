@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2022 CardGate
+ * Copyright (c) 2018 CardGate B.V.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
  * SOFTWARE.
  *
  * @license     The MIT License (MIT) https://opensource.org/licenses/MIT
- * @author      CardGate
- * @copyright   CardGate
+ * @author      CardGate B.V.
+ * @copyright   CardGate B.V.
  * @link        https://www.cardgate.com
  */
 namespace cardgate\api\resource {
