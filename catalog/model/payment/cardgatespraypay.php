@@ -18,18 +18,20 @@ namespace Opencart\Catalog\Model\Extension\Cardgate\Payment;
  */
 class CardGateSpraypay extends \Opencart\System\Engine\Model {
 
-    public function getMethod( $address ) {
-
+    public function getMethods( $address ) {
         $this->load->language( 'extension/cardgate/payment/cardgatespraypay' );
 
-        $query = $this->db->query( "SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . ( int ) $this->config->get( 'payment_cardgatespraypay_geo_zone_id' ) . "' AND country_id = '" . ( int ) $address['country_id'] . "' AND (zone_id = '" . ( int ) $address['zone_id'] . "' OR zone_id = '0')" );
-
-        if ( !$this->config->get( 'payment_cardgatespraypay_geo_zone_id' ) ) {
-            $status = true;
-        } elseif ( $query->num_rows ) {
+        if ($this->cart->hasSubscription()) {
+            $status = false;
+        } elseif (!$this->config->get('payment_cardgatespraypay_geo_zone_id')) {
             $status = true;
         } else {
-            $status = false;
+            $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone_to_geo_zone` WHERE `geo_zone_id` = '" . (int)$this->config->get('payment_cardgatespraypay_geo_zone_id') . "' AND `country_id` = '" . (int)$address['country_id'] . "' AND (`zone_id` = '" . (int)$address['zone_id'] . "' OR `zone_id` = '0')");
+            if ($query->num_rows) {
+                $status = true;
+            } else {
+                $status = false;
+            }
         }
 
 
@@ -39,15 +41,19 @@ class CardGateSpraypay extends \Opencart\System\Engine\Model {
             $title = trim($this->language->get( 'text_title' ));
         }
 
-        $method_data = array();
+        $method_data = [];
         if ( $status ) {
+            $option_data['cardgatespraypay'] = [
+                'code' => 'cardgatespraypay.cardgatespraypay',
+                'name' => $this->language->get('heading_title')
+            ];
 
-            $method_data = array(
-                'code' => 'cardgatespraypay',
-                'title' => $title,
-                'terms' => '',
-                'sort_order' => $this->config->get( 'payment_cardgatespraypay_sort_order' )
-            );
+            $method_data = [
+                'code'       => 'cardgatespraypay',
+                'name'       => $title,
+                'option'     => $option_data,
+                'sort_order' => $this->config->get('payment_cardgatespraypay_sort_order')
+            ];
         }
 
         return $method_data;
