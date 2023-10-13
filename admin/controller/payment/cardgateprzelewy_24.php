@@ -3,7 +3,7 @@ namespace Opencart\Admin\Controller\Extension\Cardgate\Payment;
 
 include_once 'cardgate.php';
 
-class CardgatePrzelewy24 extends CardgateGeneric {
+class cardgateprzelewy24 extends CardgateGeneric {
 
     public function index() {
         $this->_index('cardgateprzelewy24');

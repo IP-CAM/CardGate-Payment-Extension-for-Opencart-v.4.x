@@ -19,7 +19,7 @@
      */
     class CardgateGeneric extends \Opencart\System\Engine\Controller {
         // Also adjust the version in Opencart\Admin\Controller\Extension\Cardgate\Payment\CardgateGeneric
-        protected $version = '4.0.3';
+        protected $version = '4.0.4';
 
         /**
          * Index action
@@ -30,8 +30,10 @@
             $data ['button_confirm'] = $this->language->get ( 'button_confirm' );
             $data ['redirect_message'] = $this->language->get ( 'text_redirect_message' );
             $data ['text_select_payment_method'] = $this->language->get ( 'text_select_payment_method' );
-            $data ['text_ideal_bank_selection'] = $this->language->get ( 'text_ideal_bank_selection' );
-            $data ['text_ideal_bank_options'] = $this->getBankOptions ();
+            if ($payment == 'cardgateideal') {
+                $data ['text_ideal_bank_selection'] = $this->language->get( 'text_ideal_bank_selection' );
+                $data ['text_ideal_bank_options']   = $this->getBankOptions();
+            }
             $data['language'] = $this->config->get('config_language');
 
             return $this->load->view ( 'extension/cardgate/payment/' . $payment, $data );
@@ -43,9 +45,12 @@
         public function _confirm($payment) {
             $this->load->language('extension/cardgate/payment/'.$payment);
 
-            $use_payment_address = $this->config->get('config_checkout_address');
-            $json =[];
-            if(empty($use_payment_address)|| $use_payment_address == 0){
+            $this->load->model( 'checkout/order' );
+            $this->load->model( 'account/address' );
+
+            $order_info = $this->model_checkout_order->getOrder( $this->session->data ['order_id'] );
+            $json = [];
+            if (!$this->hasBillingAddress($order_info)){
                 $json['error'] = 'CardGate error: Billing address needs to be set in the checkout';
                 $this->response->setOutput ( json_encode ( $json ) );
             }
@@ -53,11 +58,6 @@
             if (!$json) {
                 try {
                     include 'cardgate-clientlib-php/init.php';
-                    $this->load->model( 'checkout/order' );
-                    $this->load->model( 'account/address' );
-
-                    $order_info = $this->model_checkout_order->getOrder( $this->session->data ['order_id'] );
-
                     $amount   = ( int ) round( $this->currency->format( $order_info ['total'], $order_info ['currency_code'], false, false ) * 100, 0 );
                     $currency = strtoupper( $order_info ['currency_code'] );
                     $option   = substr( $payment, 8 );
@@ -125,8 +125,7 @@
 
                     if ( $this->cart->hasShipping() && ! empty ( $this->session->data ['shipping_method'] ) ) {
 
-                        $shipping_codes = explode( ".", $this->session->data['shipping_method'] );
-                        $shipping_data  = $this->session->data['shipping_methods'][ $shipping_codes[0] ]['quote'][ $shipping_codes[1] ];
+                        $shipping_data = $this->session->data['shipping_method'];
 
                         if ( ! empty( $shipping_data['cost'] && $shipping_data['cost'] > 0 ) ) {
                             $price        = $this->convertAmount( $this->tax->calculate( $shipping_data ['cost'], $shipping_data ['tax_class_id'], false ), $order_info ['currency_code'] );
@@ -135,7 +134,7 @@
                             $vat_perc     = round( $vat / $price, 2 );
                             $vat_per_item = round( $price_wt - $price, 0 );
                             $shipping_tax = $vat_per_item;
-                            $oItem        = $oCart->addItem( \cardgate\api\Item::TYPE_SHIPPING, $shipping_data ['code'], $shipping_data ['title'], 1, $price_wt );
+                            $oItem        = $oCart->addItem( \cardgate\api\Item::TYPE_SHIPPING, $shipping_data ['code'], $shipping_data ['name'], 1, $price_wt );
                             $oItem->setVat( $vat_perc );
                             $oItem->setVatAmount( $vat_per_item );
                             $oItem->setVatIncluded( 1 );
@@ -204,7 +203,7 @@
                     $oTransaction->setSuccessUrl( $this->url->link( 'extension/cardgate/payment/' . $payment . '|success' ) );
                     $oTransaction->setFailureUrl( $this->url->link( 'extension/cardgate/payment/' . $payment . '|cancel' ) );
                     $oTransaction->setReference( $order_info ['order_id'] . '|' . $this->request->cookie[ $this->config->get( 'session_name' ) ] );
-                    $oTransaction->setDescription( 'Order' . $order_info ['order_id'] );
+                    $oTransaction->setDescription( 'Order ' . $order_info ['order_id'] );
                     $oTransaction->register ();
 
                     $sActionUrl = $oTransaction->getActionUrl();
@@ -223,6 +222,24 @@
             }
             $this->response->addHeader ( 'Content-Type: application/json' );
             $this->response->setOutput ( json_encode ( $json ) );
+        }
+
+        /**
+         * @param $order_info
+         *
+         * @return bool
+         */
+        public function hasBillingAddress($order_info){
+            $result = false;
+            if (!empty($order_info['payment_firstname']) &&
+                !empty($order_info['payment_lastname']) &&
+                !empty($order_info['payment_address_1']) &&
+                !empty($order_info['payment_city']) &&
+                !empty($order_info['payment_postcode']) &&
+                !empty($order_info['payment_country_id'])) {
+                $result = true;
+            }
+            return $result;
         }
 
         /**
