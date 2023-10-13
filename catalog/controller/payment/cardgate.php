@@ -203,7 +203,7 @@
                     $oTransaction->setSuccessUrl( $this->url->link( 'extension/cardgate/payment/' . $payment . '|success' ) );
                     $oTransaction->setFailureUrl( $this->url->link( 'extension/cardgate/payment/' . $payment . '|cancel' ) );
                     $oTransaction->setReference( $order_info ['order_id'] . '|' . $this->request->cookie[ $this->config->get( 'session_name' ) ] );
-                    $oTransaction->setDescription( 'Order' . $order_info ['order_id'] );
+                    $oTransaction->setDescription( 'Order ' . $order_info ['order_id'] );
                     $oTransaction->register ();
 
                     $sActionUrl = $oTransaction->getActionUrl();
