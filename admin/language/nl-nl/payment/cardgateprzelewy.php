@@ -22,7 +22,7 @@ $_['text_extension']         = 'Extensions';
 
 // Text
 $_['text_payment']                      = 'Extensions';
-$_['text_cardgateprzelewy24']             = '<a onclick="window.open(\'http://www.cardgate.com/\');"><img src="/extension/cardgate/admin/view/image/payment/cardgate.png" alt="CardGate Przelewy24" title="CardGate Przelewy24" style="border: 1px solid #EEEEEE;" /></a>';
+$_['text_cardgateprzelewy']             = '<a onclick="window.open(\'http://www.cardgate.com/\');"><img src="/extension/cardgate/admin/view/image/payment/cardgate.png" alt="CardGate Przelewy24" title="CardGate Przelewy24" style="border: 1px solid #EEEEEE;" /></a>';
 $_['text_success']                      = 'Gelukt: U heeft uw Cardgate Przelewy24 instellingen gewijzigd!';
 $_['text_custom_payment_method_text']   = 'Gebruik een aangepaste tekst voor de betaalmethode';
 $_['text_total']                        = 'Het order totaal moet boven dit bedrag zijn om de betaalmethode te tonen.';

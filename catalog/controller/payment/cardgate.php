@@ -19,7 +19,7 @@
      */
     class CardgateGeneric extends \Opencart\System\Engine\Controller {
         // Also adjust the version in Opencart\Admin\Controller\Extension\Cardgate\Payment\CardgateGeneric
-        protected $version = '4.0.5';
+        protected $version = '4.0.6';
 
         /**
          * Index action
@@ -61,6 +61,7 @@
                     $amount   = ( int ) round( $this->currency->format( $order_info ['total'], $order_info ['currency_code'], false, false ) * 100, 0 );
                     $currency = strtoupper( $order_info ['currency_code'] );
                     $option   = substr( $payment, 8 );
+                    $option = $option== 'przelewy'? 'przelewy24': $option;
 
                     $oCardGate = new \cardgate\api\Client ( ( int ) $this->config->get( 'payment_cardgate_merchant_id' ), $this->config->get( 'payment_cardgate_api_key' ), ( $this->config->get( 'payment_cardgate_test_mode' ) == 'test' ? true : false ) );
                     $oCardGate->setIp( $_SERVER ['REMOTE_ADDR'] );
