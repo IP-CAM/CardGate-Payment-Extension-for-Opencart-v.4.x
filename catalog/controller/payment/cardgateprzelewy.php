@@ -19,13 +19,13 @@ namespace Opencart\Catalog\Controller\Extension\Cardgate\Payment;
 
 include_once 'cardgate.php';
 
-class CardGatePrzelewy24 extends CardgateGeneric {
+class CardGatePrzelewy extends CardgateGeneric {
 
     public function index() {
-        return $this->_index('cardgateprzelewy24');
+        return $this->_index('cardgateprzelewy');
     }
 
     public function confirm() {
-        $this->_confirm('cardgateprzelewy24');
+        $this->_confirm('cardgateprzelewy');
     }
 }

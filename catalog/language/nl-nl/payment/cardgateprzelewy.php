@@ -18,7 +18,6 @@
 
 // Heading
 $_['heading_title']             = 'Przelewy24';
-
 // Text
 include_once 'cardgate.php';
 $_['text_title']                = 'Przelewy24';
