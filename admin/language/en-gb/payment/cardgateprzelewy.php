@@ -22,7 +22,7 @@ $_['text_extension']                    = 'Extensions';
 
 // Text
 $_['text_payment']                      = 'Extensions';
-$_['text_cardgateprzelewy24']                = '<a onclick="window.open(\'http://www.cardgate.com/\');"><img src="/extension/cardgate/admin/view/image/payment/cardgate.png" alt="CardGate Przelewy24" title="CardGate Przelewy24" style="border: 1px solid #EEEEEE;" /></a>';
+$_['text_cardgateprzelewy']                = '<a onclick="window.open(\'http://www.cardgate.com/\');"><img src="/extension/cardgate/admin/view/image/payment/cardgate.png" alt="CardGate Przelewy24" title="CardGate Przelewy24" style="border: 1px solid #EEEEEE;" /></a>';
 $_['text_success']                      = 'Success: You have modified CardGate Przelewy24 account details!';
 $_['text_custom_payment_method_text']   = 'Use your own payment method text in the checkout.';
 $_['text_total']                        = 'The checkout total the order must reach before this payment method becomes active.';
