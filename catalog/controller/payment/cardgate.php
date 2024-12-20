@@ -19,7 +19,7 @@
      */
     class CardgateGeneric extends \Opencart\System\Engine\Controller {
         // Also adjust the version in Opencart\Admin\Controller\Extension\Cardgate\Payment\CardgateGeneric
-        protected $version = '4.0.6';
+        protected $version = '4.0.7';
 
         /**
          * Index action
@@ -31,6 +31,7 @@
             $data ['redirect_message'] = $this->language->get ( 'text_redirect_message' );
             $data ['text_select_payment_method'] = $this->language->get ( 'text_select_payment_method' );
             if ($payment == 'cardgateideal') {
+                $data ['show_issuers'] = boolval( $this->config->get( 'payment_cardgateideal_show_issuers' ) );
                 $data ['text_ideal_bank_selection'] = $this->language->get( 'text_ideal_bank_selection' );
                 $data ['text_ideal_bank_options']   = $this->getBankOptions();
             }
@@ -77,7 +78,7 @@
 
                     // Configure payment option.
                     $oTransaction->setPaymentMethod( $oCardGate->methods()->get( $option ) );
-                    if ( 'ideal' == $option ) {
+                    if ( 'ideal' == $option && boolval( $this->config->get( 'payment_cardgateideal_show_issuers' ) ) == true ) {
                         $oTransaction->setIssuer( $this->request->post['suboption'] );
                     }
 
