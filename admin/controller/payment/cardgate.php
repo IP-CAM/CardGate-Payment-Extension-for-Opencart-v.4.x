@@ -16,7 +16,7 @@ class Cardgate extends CardgateGeneric {
 class CardgateGeneric extends \Opencart\System\Engine\Controller {
     // Also adjust the version in Opencart\Catalog\Controller\Extension\Cardgate\Payment\CardgateGeneric
     protected $payment;
-    protected $version = '4.0.6';
+    protected $version = '4.0.7';
 
     public function _index($payment): void {
         $this->load->language( 'extension/cardgate/payment/' . $payment );
@@ -77,6 +77,9 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
             $data[ $this->key( 'geo_zone_id' ) ]                = $this->config->get( $this->key( 'geo_zone_id' ) );
             $data[ $this->key( 'status' ) ]                     = $this->config->get( $this->key( 'status' ) );
             $data[ $this->key( 'sort_order' ) ]                 = $this->config->get( $this->key( 'sort_order' ) );
+            if ($payment == 'cardgateideal'){
+                $data[ $this->key( 'show_issuers' ) ]           = boolval( $this->config->get( $this->key( 'show_issuers' ) ) );
+            }
         }
 
         return $data;
@@ -115,7 +118,8 @@ class CardgateGeneric extends \Opencart\System\Engine\Controller {
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
     }
-    private function key($variable) {
+
+    private function key( $variable ) {
         return 'payment_'.$this->payment.'_'.$variable;
     }
 }
